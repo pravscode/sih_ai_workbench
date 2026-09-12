@@ -161,7 +161,18 @@ const sendMessage = async () => {
     const aiMessage = {
       id: Date.now() + 1,
       role: "assistant",
-      text: data.result,
+      text: 
+        typeof data.result==="object"
+          ?data.result.answer
+          :data.result,
+      wordFile:
+        typeof data.result==="object"
+          ?data.result.word_file
+          :null,
+      pdfFile:
+        typeof data.result==="object"
+          ?data.result.pdf_file
+          :null,
     };
 
     setMessages((previous) => [...previous, aiMessage]);
@@ -557,6 +568,26 @@ const sendMessage = async () => {
                     <div className="message-bubble">
                       {message.text}
                     </div>
+
+                    {message.wordFile && (
+                      <a
+                        href={`http://127.0.0.1:8000/download/${message.wordFile.split("\\").pop()}`}
+                        download
+                        className="download-button"
+                      >
+                        Download Word
+                      </a>  
+                    )}
+                    {message.pdfFile &&(
+                    <a
+                      href={`http://127.0.0.1:8000/download/${message.pdfFile.split("\\").pop()}`}
+                      download
+                      className="download-button"
+                    >
+                      Download PDF
+                    </a>
+
+                    )}
 
 
                     {message.file && (

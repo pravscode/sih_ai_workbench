@@ -2,6 +2,7 @@ from backend.rag.rag_service import answer_question
 from backend.tools.document_generator import generate_word, generate_pdf
 from backend.security.audit_logger import log_action
 from langchain_ollama import ChatOllama
+from backend.rag import active_document
 
 
 # Local LLM
@@ -14,30 +15,6 @@ llm = ChatOllama(
 def run_agent(user_request):
 
     print("Agent received request:", user_request)
-
-    # Ask the LLM to decide what the user wants
-    decision_prompt = f"""
-Classify the user's request into exactly one category:
-
-RAG
-DIRECT
-DOCUMENT
-
-RAG = the user is asking about information from the uploaded
-company documents.
-
-DIRECT = the user is asking a general question that does not
-require the uploaded documents.
-
-DOCUMENT = the user wants a report, document, or downloadable
-Word/PDF file based on information from the uploaded documents.
-
-User request:
-{user_request}
-
-Return ONLY one word:
-RAG, DIRECT, or DOCUMENT
-"""
 
     # Check for document-generation requests first
     document_keywords = [
@@ -57,21 +34,36 @@ RAG, DIRECT, or DOCUMENT
 
     if any(keyword in request_lower for keyword in document_keywords):
         decision = "DOCUMENT"
+
+    elif active_document.active_document:
+        # If a PDF is uploaded, normal questions should use RAG
+        decision = "RAG"
+
     else:
-        decision = llm.invoke(decision_prompt).content.strip().upper()
+        # No document uploaded → general question
+        decision = "DIRECT"
 
     print("Agent decision:", decision)
 
     # 1. Document question → RAG
     if decision == "RAG":
-        return answer_question(user_request)
+        content = answer_question(user_request)
+        log_action(
+            user="employee_01",
+            request=user_request,
+            agent="RAG",
+            retrieval="ChromaDB",
+            outputs="None",
+            status="SUCCESS"
+        )
+        return content
 
     # 2. General question → Direct LLM
     if decision == "DIRECT":
         response = llm.invoke(user_request)
         return response.content
 
-            # 3. Document generation request
+    # 3. Document generation request
     if decision == "DOCUMENT":
 
         # Retrieve information from the documents

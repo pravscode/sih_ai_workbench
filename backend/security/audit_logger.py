@@ -13,8 +13,8 @@ def log_action(
     request,
     agent,
     retrieval,
-    outputs,
-    status
+    outputs="None",
+    status="SUCCESS"
 ):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 

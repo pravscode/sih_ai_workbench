@@ -2,6 +2,8 @@ from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from pathlib import Path
+from fastapi.responses import FileResponse
+from backend.security.audit_logger import log_action
 
 from backend.rag.document_processor import process_pdf
 from backend.rag import active_document
@@ -58,6 +60,14 @@ async def upload_file(file: UploadFile = File(...)):
     active_document.active_document = file.filename
 
     processing_result = process_pdf(file_path)
+    log_action(
+        user="employee_01",
+        request=f"Uploaded document: {file.filename}",
+        agent="DOCUMENT_PROCESSOR",
+        retrieval="None",
+        outputs=file.filename,
+        status="SUCCESS"
+    )
 
     return {
         "status": "success",
@@ -65,3 +75,18 @@ async def upload_file(file: UploadFile = File(...)):
         "pages": processing_result["pages"],
         "chunks": processing_result["chunks"]
     }
+@app.get("/download/{filename}")
+def download_file(filename: str):
+
+    file_path = Path("outputs") / filename
+
+    if not file_path.exists():
+        return {
+            "status": "error",
+            "message": "File not found"
+        }
+
+    return FileResponse(
+        path=file_path,
+        filename=filename
+    )
