@@ -1,18 +1,69 @@
 .login-page {
   min-height: 100vh;
+  display: grid;
+  grid-template-columns: 30% 70%;
+}
+
+.login-brand-panel {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem;
+  color: white;
+  background: linear-gradient(160deg, #1e3801, #507527);
+}
+
+.login-brand-pattern {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.login-brand-logo {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.login-brand-mark {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.login-brand-logo span {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.login-brand-quote {
+  position: relative;
+  z-index: 1;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
+  max-width: 320px;
+}
+
+.login-form-panel {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f4f4f0;
+  background: white;
+  padding: 2rem;
 }
 
 .login-card {
   width: 100%;
   max-width: 380px;
-  background: white;
-  border-radius: 12px;
-  padding: 2rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .login-card h1 {
@@ -22,7 +73,7 @@
   color: #18181b;
 }
 
-.login-card p {
+.login-card > p {
   font-size: 0.875rem;
   color: #71717a;
   margin-bottom: 1.5rem;
@@ -38,6 +89,7 @@
 .login-field label {
   font-size: 0.875rem;
   color: #52525b;
+  
 }
 
 .login-field input {
@@ -46,11 +98,40 @@
   padding: 0.5rem 0.75rem;
   font-size: 0.875rem;
   color: #18181b;
+  background-color: white;
 }
 
 .login-field input:focus {
   outline: none;
   border-color: #507527;
+}
+
+.login-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 1rem;
+}
+
+.login-remember {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #52525b;
+}
+
+.login-remember input {
+  accent-color: #507527;
+}
+
+.login-link {
+  color: #507527;
+  text-decoration: none;
+}
+
+.login-link:hover {
+  text-decoration: underline;
 }
 
 .login-error {
@@ -74,4 +155,13 @@
 .login-card button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+@media (max-width: 768px) {
+  .login-page {
+    grid-template-columns: 1fr;
+  }
+  .login-brand-panel {
+    display: none;
+  }
 }

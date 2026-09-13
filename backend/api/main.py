@@ -9,6 +9,9 @@ from backend.rag.document_processor import process_pdf
 from backend.rag import active_document
 from backend.agent.agent import run_agent
 
+from backend.database import SessionLocal
+from backend.security.models import User
+import bcrypt
 
 app = FastAPI(
     title="Sovereign AI Workbench"
@@ -23,6 +26,10 @@ app.add_middleware(
 
 class ChatRequest(BaseModel):
     message: str
+
+class LoginRequest(BaseModel):
+    email: str
+    password: str
 
 
 @app.get("/")
@@ -40,6 +47,26 @@ def chat(request: ChatRequest):
     return {
         "result": result
     }
+
+@app.post("/login") #login integration
+def login(request: LoginRequest):
+    db = SessionLocal()
+    user = db.query(User).filter(User.email == request.email).first()
+    db.close()
+
+    if not user:
+        return {"status": "error", "message": "Invalid email or password"}
+
+    password_matches = bcrypt.checkpw(
+        request.password.encode(),
+        user.hashed_password.encode()
+    )
+
+    if not password_matches:
+        return {"status": "error", "message": "Invalid email or password"}
+
+    return {"status": "success", "email": user.email}
+
 UPLOAD_DIR = Path("data/documents")
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 

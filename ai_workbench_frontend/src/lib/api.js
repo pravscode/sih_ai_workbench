@@ -1,10 +1,17 @@
-const API_BASE_URL = "http://127.0.0.1:8000"; // will be used once real backend call is added
+const API_BASE_URL = "http://127.0.0.1:8000";
 
-export async function loginUser({ email, password: _password }) {
-  await new Promise((resolve) => setTimeout(resolve, 800));
+export async function loginUser({ email, password }) {
+  const res = await fetch(`${API_BASE_URL}/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
 
-  return {
-    success: true,
-    user: { email },
-  };
+  const data = await res.json();
+
+  if (data.status === "error") {
+    throw new Error(data.message);
+  }
+
+  return data;
 }
