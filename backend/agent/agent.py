@@ -36,8 +36,31 @@ def run_agent(user_request):
         decision = "DOCUMENT"
 
     elif active_document.active_document:
-        # If a PDF is uploaded, normal questions should use RAG
-        decision = "RAG"
+        document_keywords_for_rag = [
+            "document",
+            "uploaded",
+            "file",
+            "pdf",
+            "according to",
+            "in the document",
+            "from the document",
+            "from this document",
+            "in this document",
+            "based on the document",
+            "based on this",
+            "what does the document",
+            "what does it say",
+            "what is mentioned",
+            "what are the",
+            "explain",
+            "according to the sop",
+            "according to the manual",
+            "according to the report",
+        ]
+        if any(keyword in request_lower for keyword in document_keywords_for_rag):
+            decision = "RAG"
+        else:
+            decision = "DIRECT"
 
     else:
         # No document uploaded → general question

@@ -13,22 +13,24 @@ embeddings = HuggingFaceEmbeddings(
     model_name=EMBEDDING_MODEL
 )
 
-vector_store = Chroma(
-    collection_name="company_knowledge",
-    embedding_function=embeddings,
-    persist_directory="data/vector_db"
-)
-
 
 def process_pdf(file_path):
-    global vector_store
-
     file_path = Path(file_path)
 
-    # Remove the previous document from the vector database
-    vector_store.delete_collection()
+    # Always connect to the current Chroma collection
+    vector_store = Chroma(
+        collection_name="company_knowledge",
+        embedding_function=embeddings,
+        persist_directory="data/vector_db"
+    )
 
-    # Create a fresh collection for the newly uploaded document
+    # Remove previous collection so this MVP uses only the latest upload
+    try:
+        vector_store.delete_collection()
+    except Exception:
+        pass
+
+    # Recreate a clean collection
     vector_store = Chroma(
         collection_name="company_knowledge",
         embedding_function=embeddings,
@@ -66,6 +68,9 @@ def process_pdf(file_path):
     chunks = splitter.split_documents(documents)
 
     vector_store.add_documents(chunks)
+
+    print("INDEXED DOCUMENT:", file_path.name)
+    print("NUMBER OF CHUNKS:", len(chunks))
 
     return {
         "filename": file_path.name,

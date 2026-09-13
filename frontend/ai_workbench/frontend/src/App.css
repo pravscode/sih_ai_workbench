@@ -331,20 +331,27 @@ body {
 
   gap: 10px;
 
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .system-dot {
   width: 9px;
   height: 9px;
-
+  flex-shrink: 0;
   border-radius: 50%;
-
-  background: #4ac554;
+  background: #4caf54;
+}
+.system-status-content {
+  display: flex;
+  flex-direction: column;
 }
 
-.system-subtitle {
-  margin-top: 5px;
+.system-status-content strong {
+  font-size: 14px;
+}
+
+.system-text {
+  margin-top: 3px;
   margin-left: 19px;
 
   color: #899686;
@@ -415,6 +422,7 @@ body {
   align-items: center;
 
   gap: 8px;
+  margin-left: auto;
 }
 
 .header-icon-button {
@@ -484,7 +492,7 @@ body {
 
   margin: 0 auto;
 
-  padding: 55px 30px 30px;
+  padding: 35px 30px 30px;
 
   display: flex;
   flex-direction: column;
@@ -687,7 +695,7 @@ body {
 
 .suggestion-row {
   width: 100%;
-  min-height: 70px;
+  min-height: 62px;
 
   display: flex;
   align-items: center;
@@ -720,8 +728,8 @@ body {
 }
 
 .suggestion-icon {
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
 
   flex-shrink: 0;
 

@@ -1,10 +1,8 @@
 import { useRef, useState } from "react";
 import {
   Plus,
-  ExternalLink,
   Search,
   Sun,
-  ChevronDown,
   ChevronRight,
   Paperclip,
   Send,
@@ -29,20 +27,20 @@ import "./App.css";
 const suggestions = [
   {
     title: "Analyze a document",
-    subtitle: "Summarize this document and identify the key insights.",
+    subtitle: "Summarize the key information in this document.",
     icon: FileText,
     type: "blue",
   },
   {
-    title: "Generate an idea",
-    subtitle: "Create an innovative AI solution for a real-world problem.",
-    icon: Lightbulb,
+    title: "Query the knowledge base",
+    subtitle: "What information is available in the uploaded documents?",
+    icon:Search,
     type: "purple",
   },
   {
-    title: "Write code",
-    subtitle: "Create a Python solution for analyzing a dataset.",
-    icon: Code2,
+    title:"Generate a report",
+    subtitle: "Create a report based on the uploaded document.",
+    icon: FileText,
     type: "green",
   },
 ];
@@ -54,23 +52,23 @@ const suggestions = [
 
 const features = [
   {
-    title: "Intelligent",
-    description: "Powered by open-source AI models",
-    icon: Sparkles,
-  },
-  {
-    title: "Secure",
-    description: "Runs entirely on-premise (air-gapped)",
+    title: "Private",
+    description:"Runs entirely on your organization's infrastructure",
     icon: Shield,
   },
   {
-    title: "Flexible",
-    description: "Chat, analyze, generate, automate",
-    icon: Box,
+    title:"Document AI",
+    description: "Understand and retrieve information from documents",
+    icon:FileText,
   },
   {
-    title: "Ready",
-    description: "Your AI workspace, set up and running",
+    title: "Secure",
+    description: "Designed for confidential, offline workloads",
+    icon:Sparkles,
+  },
+  {
+    title: "Auditable",
+    description: "Track requests, retrieval, and generated outputs",
     icon: Zap,
   },
 ];
@@ -284,27 +282,12 @@ const sendMessage = async () => {
 
       <aside className="sidebar">
 
-        {/* BRAND */}
+       {/* BRAND */}
         <div className="sidebar-brand-row">
           <div className="sidebar-brand">
 
-            <div className="logo-circle">
-              <span className="logo-center">✦</span>
-
-              <span className="logo-node node-1"></span>
-              <span className="logo-node node-2"></span>
-              <span className="logo-node node-3"></span>
-              <span className="logo-node node-4"></span>
-              <span className="logo-node node-5"></span>
-              <span className="logo-node node-6"></span>
-            </div>
-
             <span>AI Workbench</span>
           </div>
-
-          <button className="sidebar-icon-button">
-            <ExternalLink size={18} />
-          </button>
         </div>
 
 
@@ -327,15 +310,12 @@ const sendMessage = async () => {
 
           <div className="system-status-row">
             <span className="system-dot"></span>
-
-            <strong>System Ready</strong>
-          </div>
-
-          <div className="system-subtitle">
-            Running on-premise
-          </div>
-
-        </div>
+             <strong>System Ready</strong>
+            </div>
+             <div className="system-text">
+              Running on-premises
+             </div>
+            </div>
 
       </aside>
 
@@ -352,19 +332,7 @@ const sendMessage = async () => {
         ================================================= */}
 
         <header className="chat-header">
-
-          <button className="chat-title-button">
-            <strong>New chat</strong>
-            <ChevronDown size={17} />
-          </button>
-
-
           <div className="header-actions">
-
-            <button className="header-icon-button">
-              <Search size={21} />
-            </button>
-
 
             <button
               className="header-icon-button"
@@ -377,11 +345,6 @@ const sendMessage = async () => {
                 <Sun size={21} />
               )}
             </button>
-
-
-            <div className="user-avatar">
-              M
-            </div>
 
           </div>
 
@@ -402,24 +365,6 @@ const sendMessage = async () => {
 
             <div className="empty-state">
 
-
-              {/* LARGE LOGO */}
-              <div className="large-logo">
-
-                <span className="large-logo-center">
-                  ✦
-                </span>
-
-                <span className="large-node large-node-1"></span>
-                <span className="large-node large-node-2"></span>
-                <span className="large-node large-node-3"></span>
-                <span className="large-node large-node-4"></span>
-                <span className="large-node large-node-5"></span>
-                <span className="large-node large-node-6"></span>
-
-              </div>
-
-
               {/* TITLE */}
               <h1>
                 AI Workbench
@@ -428,15 +373,14 @@ const sendMessage = async () => {
 
               {/* SUBTITLE */}
               <h2>
-                One workspace. Infinite possibilities.
+                Your Private AI Workbench
               </h2>
 
 
               {/* DESCRIPTION */}
               <p className="empty-description">
-                Turn ideas into intelligent solutions with one
-                powerful AI workspace designed for experimentation,
-                automation, and productivity.
+                Securely analyze documents, query organizational knowledge,
+                and generate reports — entirely on-premise.
               </p>
 
 
@@ -477,7 +421,7 @@ const sendMessage = async () => {
               <div className="suggestions-container">
 
                 <div className="suggestions-title">
-                  Try asking me about...
+                  Quick actions
                 </div>
 
 
