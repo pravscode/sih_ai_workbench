@@ -1,4 +1,4 @@
-from backend.rag.rag_service import answer_question
+from backend.rag.rag_service import answer_question,summarize_document
 from backend.tools.document_generator import generate_word, generate_pdf
 from backend.security.audit_logger import log_action
 from langchain_ollama import ChatOllama
@@ -90,7 +90,7 @@ def run_agent(user_request):
     if decision == "DOCUMENT":
 
         # Retrieve information from the documents
-        content = answer_question(user_request)
+        content = summarize_document()
 
         # Generate Word document
         word_file = generate_word(

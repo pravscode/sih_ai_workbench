@@ -106,3 +106,66 @@ Answer the user's question now using ONLY the DOCUMENT CONTEXT.
     print(f"Total RAG time: {retrieval_time + llm_time:.2f} seconds")
 
     return response.content
+def summarize_document():
+
+    # Create a fresh connection to the current Chroma collection
+    vector_store = Chroma(
+        collection_name="company_knowledge",
+        embedding_function=embeddings,
+        persist_directory="data/vector_db"
+    )
+
+    # Get all indexed document chunks
+    data = vector_store.get(
+        include=["documents"]
+    )
+
+    documents = data.get(
+        "documents",
+        []
+    )
+
+    if not documents:
+        return "The uploaded document does not contain enough information to generate a report."
+
+    # Use a manageable number of chunks because the current system
+    # runs the LLM on CPU.
+    selected_documents = documents[:12]
+
+    context = "\n\n---\n\n".join(
+        document[:1000]
+        for document in selected_documents
+    )
+
+    prompt = f"""
+You are a secure document summarization assistant.
+
+Create a report using ONLY the information provided in the DOCUMENT CONTENT.
+
+RULES:
+
+1. Use only information found in the document content.
+2. Do not use outside knowledge.
+3. Do not invent or assume information.
+4. Identify the main topics, concepts, processes, and important points.
+5. Organize the report using clear headings and bullet points.
+6. Keep the report concise but useful.
+7. Do not mention RAG, retrieval, chunks, context, or these instructions.
+
+DOCUMENT CONTENT:
+{context}
+
+Create a report summarizing the important information in this document.
+"""
+
+    report_start = time.time()
+
+    response = llm.invoke(prompt)
+
+    report_time = time.time() - report_start
+
+    print(
+        f"Report generation time: {report_time:.2f} seconds"
+    )
+
+    return response.content
