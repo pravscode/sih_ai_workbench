@@ -1394,3 +1394,316 @@ body {
     white-space: normal;
   }
 }
+.inspection-result {
+  margin-top: 14px;
+  padding: 18px;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.inspection-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.inspection-icon {
+  width: 38px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: #f1f5f9;
+  font-size: 19px;
+}
+
+.inspection-header h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.inspection-header span {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.inspection-section {
+  margin-bottom: 18px;
+}
+
+.inspection-section:last-child {
+  margin-bottom: 0;
+}
+
+.section-title {
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.inspection-section p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #475569;
+}
+
+.support-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.supported {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.unsupported {
+  background: #fff7ed;
+  color: #c2410c;
+}
+
+.evidence-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.evidence-item {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: #f8fafc;
+  font-size: 13px;
+  color: #475569;
+}.coding-result {
+  margin-top: 16px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.coding-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.coding-icon {
+  font-size: 24px;
+}
+
+.coding-header h3 {
+  margin: 0;
+}
+
+.coding-header span {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.coding-section {
+  margin-top: 16px;
+}
+
+.code-block {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 10px;
+  background: #f5f5f5;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  text-align: left;
+  font-family: monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.code-error {
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #fff1f1;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  font-family: monospace;
+  font-size: 12px;
+}
+.sovereignty-card {
+  margin-top: 16px;
+  padding: 18px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.sovereignty-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.sovereignty-icon {
+  font-size: 24px;
+}
+
+.sovereignty-header h3 {
+  margin: 0;
+}
+
+.sovereignty-header span {
+  font-size: 13px;
+  opacity: 0.7;
+}
+
+.sovereignty-details {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.sovereignty-details div {
+  padding: 12px;
+  border-radius: 10px;
+  background: #f5f5f5;
+}
+
+.sovereignty-details span {
+  display: block;
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+
+.sovereignty-details strong {
+  font-size: 14px;
+}
+/* =========================================================
+   ACTIVE DOCUMENT
+========================================================= */
+
+.active-document-card {
+  width: 100%;
+  max-width: 760px;
+  margin: 28px auto 20px;
+
+  display: flex;
+  align-items: center;
+  gap: 14px;
+
+  padding: 14px 16px;
+
+  border: 1px solid #dbe3ef;
+  border-radius: 14px;
+
+  background: #ffffff;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.06);
+}
+
+.active-document-icon {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: #eef4ff;
+  color: #2563eb;
+
+  flex-shrink: 0;
+}
+
+.active-document-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  flex: 1;
+  min-width: 0;
+}
+
+.active-document-info span {
+  font-size: 12px;
+  color: #64748b;
+}
+
+.active-document-info strong {
+  font-size: 14px;
+  color: #1e293b;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.active-document-status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  color: #16a34a;
+
+  flex-shrink: 0;
+}
+
+.active-status-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+  background: #22c55e;
+}
+/* =========================================================
+   SOVEREIGNTY INDICATOR
+========================================================= */
+
+.sovereignty-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 7px 12px;
+
+  border: 1px solid #d1fae5;
+  border-radius: 999px;
+
+  background: #f0fdf4;
+
+  color: #15803d;
+
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.sovereignty-dot {
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #22c55e;
+  box-shadow: 0 0 0 3px #dcfce7;
+}

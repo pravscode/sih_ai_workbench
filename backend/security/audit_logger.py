@@ -14,7 +14,9 @@ def log_action(
     agent,
     retrieval,
     outputs="None",
-    status="SUCCESS"
+    status="SUCCESS",
+    sovereignty_status=None,
+    external_connections=None
 ):
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
@@ -28,6 +30,8 @@ Agent:      {agent}
 Retrieval:  {retrieval}
 Output:     {outputs}
 Status:     {status}
+Sovereignty: {sovereignty_status}
+External Connections: {external_connections}
 ────────────────────────────────────────────
 
 """
